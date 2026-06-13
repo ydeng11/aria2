@@ -1,8 +1,8 @@
 # Multi-stage Dockerfile for aria2 (Linux, suitable for Synology).
-# Builds from local source (apply PR #1869 patch before building).
+# Builds from local source with retry-on-invalid-range fix (PR #2222).
 # Usage:
-#   docker build -t YOUR_DOCKERHUB_USER/aria2:ex-invalid-range-fix .
-#   docker push YOUR_DOCKERHUB_USER/aria2:ex-invalid-range-fix
+#   docker build -t ydeng11/aria2:invalid-range-retry .
+#   docker push ydeng11/aria2:invalid-range-retry
 
 # -----------------------------------------------------------------------------
 # Stage 1: build aria2 from local source
@@ -33,7 +33,7 @@ RUN apt-get update && \
 
 WORKDIR /build
 
-# Copy local repo (with PR #1869 patch applied)
+# Copy local repo
 COPY . .
 
 RUN autoreconf -i && \

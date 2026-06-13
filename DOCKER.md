@@ -1,16 +1,14 @@
-# Building and pushing the aria2 Docker image (PR #1869 fix)
+# Building and pushing the aria2 Docker image (PR #2222 fix)
 
-This image is built from the **local** source tree with the EX_INVALID_RANGE_HEADER workaround (PR #1869) applied. Suitable for Synology (amd64) and other Linux hosts.
+This image is built from the **local** source tree with the invalid-range-header retry fix (PR #2222). Suitable for Synology (amd64) and other Linux hosts.
 
 ## Build
 
 From the repository root:
 
 ```bash
-docker build -t YOUR_DOCKERHUB_USER/aria2:ex-invalid-range-fix .
+docker build -t ydeng11/aria2:invalid-range-retry .
 ```
-
-Replace `YOUR_DOCKERHUB_USER` with your Docker Hub username.
 
 ## Push to Docker Hub
 
@@ -23,19 +21,19 @@ Replace `YOUR_DOCKERHUB_USER` with your Docker Hub username.
 2. Push the image:
 
    ```bash
-   docker push YOUR_DOCKERHUB_USER/aria2:ex-invalid-range-fix
+   docker push ydeng11/aria2:invalid-range-retry
    ```
 
 ## Use on Synology
 
 In Container Manager (or Docker on Synology), use image:
 
-- `YOUR_DOCKERHUB_USER/aria2:ex-invalid-range-fix`
+- `ydeng11/aria2:invalid-range-retry`
 
 Example run (customize as needed):
 
 ```bash
-docker run --rm -v /path/to/downloads:/downloads YOUR_DOCKERHUB_USER/aria2:ex-invalid-range-fix \
+docker run --rm -v /path/to/downloads:/downloads ydeng11/aria2:invalid-range-retry \
   -d /downloads \
   --enable-rpc \
   --rpc-listen-all \
